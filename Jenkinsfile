@@ -16,6 +16,7 @@ pipeline{
             }
             steps{
                 echo 'Building...'
+                sh 'docker run'
                 sh 'make clean'
                 sh "RELEASE=${params.RELEASE} make all"
                 echo "Linux Native build complete."
