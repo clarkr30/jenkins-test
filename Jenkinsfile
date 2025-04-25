@@ -2,6 +2,7 @@ pipeline{
     agent{
         docker{
             image 'node:18.17.1-alpine3.18'
+            args '-u root'
         }
     }
 
@@ -12,6 +13,7 @@ pipeline{
     stages{
         stage('Build'){
             steps{
+                sh 'uname -a'
                 echo 'Building...'
                 sh 'ls'
                 sh 'echo "--- PATH ---"'
