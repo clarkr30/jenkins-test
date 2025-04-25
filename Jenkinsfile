@@ -15,6 +15,7 @@ pipeline{
             steps{
                 sh 'uname -a'
                 echo 'Building...'
+                sh 'whoami'
                 sh 'ls'
                 sh 'echo "--- PATH ---"'
                 sh 'echo $PATH'
