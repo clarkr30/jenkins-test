@@ -1,5 +1,3 @@
-docker:latest
-
 pipeline{
     agent any
 
