@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y lsb-release ca-certificates curl && \
     | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
     apt-get install -y build-essential && \
     apt-get -y install make && \
+    apt-get -y install git && \
     apt-get update && apt-get install -y docker-ce-cli && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 USER jenkins
