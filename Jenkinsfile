@@ -14,32 +14,23 @@ pipeline{
         stage('Build'){
             steps{
                 echo 'Building...'
-                
+
+                echo 'Installing build tools...'
+                // Install make (and gcc/g++ if needed for C/C++) using Alpine package manager
+                sh 'apk update'
+                sh 'apk add --no-cache make build-base git' // build-base includes gcc, g++, make etc. on Alpine
+
+                echo 'Running Build...'
+
+                // Your debugging steps (can be removed once it works)
                 sh 'echo "--- Running as User ---"'
-                sh 'whoami' // Should confirm 'root'
-                sh 'echo "--- Current Directory ---"'
-                sh 'pwd'
-                sh 'echo "--- Environment Variables (Sorted) ---"'
-                sh 'env | sort' // Check PATH and other variables here
+                sh 'whoami'
                 sh 'echo "--- Specific PATH Check ---"'
                 sh 'echo $PATH'
-
-                // 2. Check the suspected location directly
-                sh 'echo "--- Check /usr/bin directly ---"'
-                sh 'ls -l /usr/bin/make || echo "/usr/bin/make NOT FOUND by ls"'
-
-                // 3. Attempt to run 'which' via different shells (if available)
                 sh 'echo "--- Check which via sh ---"'
-                sh 'which make || echo "make not found by which (sh)"'
-                sh 'echo "--- Check which via bash (if installed) ---"'
-                sh 'bash -c "which make" || echo "make not found by which (bash) or bash not found"'
-
-                // 4. Attempt to run make using the full path
+                sh 'which make || echo "make not found by which (sh)"' // Should work now
                 sh 'echo "--- Attempt execution via full path ---"'
-                sh '/usr/bin/make --version || echo "/usr/bin/make --version FAILED"'
-
-                // 5. The command that originally failed
-                sh 'echo "--- Attempt original make clean ---"'
+                sh '/usr/bin/make --version || echo "/usr/bin/make --version FAILED"' // Should work now
 
                 sh 'make clean'
                 sh "RELEASE=${params.RELEASE} make all"
