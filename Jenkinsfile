@@ -1,6 +1,4 @@
 docker:latest
-docker-commons:latest
-docker-workflow:latest
 
 pipeline{
     agent any
