@@ -13,7 +13,7 @@ pipeline{
         stage('Build'){
             steps{
                 echo 'Building...'
-                ls
+                sh 'ls'
                 sh 'make clean'
                 sh "RELEASE=${params.RELEASE} make all"
                 echo "Linux Native build complete."
