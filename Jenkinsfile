@@ -13,6 +13,7 @@ pipeline{
         stage('Build'){
             steps{
                 echo 'Building...'
+                sh 'apt-get install git'
                 sh 'git clone git@github.com:clarkr30/jenkins-test.git'
                 sh 'make clean'
                 sh "RELEASE=${params.RELEASE} make all"
