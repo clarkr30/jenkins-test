@@ -14,6 +14,9 @@ pipeline{
             steps{
                 echo 'Building...'
                 sh 'ls'
+                sh 'echo $PATH'
+                sh 'echo "--- Which make ---"'
+                sh 'which make || echo "make not found by which"'
                 sh 'make clean'
                 sh "RELEASE=${params.RELEASE} make all"
                 echo "Linux Native build complete."
