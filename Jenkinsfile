@@ -13,8 +13,8 @@ pipeline{
         stage('Build'){
             steps{
                 echo 'Building...'
-                git clone git@github.com:clarkr30/jenkins-test.git
-                make clean
+                bash 'git clone git@github.com:clarkr30/jenkins-test.git'
+                sh 'make clean'
                 sh "RELEASE=${params.RELEASE} make all"
                 echo "Linux Native build complete."
             }
